@@ -3,11 +3,26 @@ import { useEffect, useState } from "react";
 
 function HomePage() {
   const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    getArticles().then((articleObj) => {
-      setArticles(articleObj.articles);
-    });
+    getArticles()
+      .then((articleObj) => {
+        setArticles(articleObj.articles);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError(err);
+        setIsLoading(false);
+      });
   }, []);
+
+  if (isLoading) {
+    return <p>Loading ◌</p>;
+  }
+  if (error) {
+    return <p>Error: {error.msg}</p>;
+  }
   return (
     <main className="article-list">
       {articles.map((article) => {
