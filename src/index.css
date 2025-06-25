@@ -42,3 +42,12 @@ header {
   text-align: center;
   justify-content: center;
 }
+
+.article-list:hover h2 {
+  text-decoration: underline;
+}
+
+.article-info {
+  display: grid;
+  justify-content: space-between;
+}
