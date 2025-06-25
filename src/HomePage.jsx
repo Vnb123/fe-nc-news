@@ -1,10 +1,12 @@
-import getArticles from "./api";
+import getArticles from "./getArticles";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
     getArticles()
       .then((articleObj) => {
@@ -17,6 +19,9 @@ function HomePage() {
       });
   }, []);
 
+  const navToPage = (url) => {
+    navigate(url);
+  };
   if (isLoading) {
     return <p>Loading ◌</p>;
   }
@@ -27,7 +32,11 @@ function HomePage() {
     <main className="article-list">
       {articles.map((article) => {
         return (
-          <article key={article.article_id} className="article-card">
+          <article
+            key={article.article_id}
+            className="article-card"
+            onClick={() => navToPage(`/articles/${article.article_id}`)}
+          >
             <p>/{article.topic}</p>
             <h2>{article.title}</h2>
             <div className="author-timestamp">
