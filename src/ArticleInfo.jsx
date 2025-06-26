@@ -3,12 +3,17 @@ import { useEffect, useState } from "react";
 import getArticleById from "./getArticleById";
 import getCommentsByArticleId from "./getCommentsByArticleId";
 import patchVotes from "./patchVotes";
+import postComment from "./postComment";
+
 function ArticleInfo() {
   const { article_id } = useParams();
   const [article, setArticle] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
+  const [voteError, setVoteError] = useState(false);
+  const [input, setInput] = useState("");
+  const [newCommentError, setNewCommentError] = useState(false);
 
   useEffect(() => {
     getArticleById(article_id)
@@ -36,19 +41,43 @@ function ArticleInfo() {
 
   function handleVoteIncrement() {
     setArticle((article) => ({ ...article, votes: article.votes + 1 }));
+    setVoteError(false);
     patchVotes(article_id, 1).catch(() => {
       setArticle((article) => ({ ...article, votes: article.votes - 1 }));
-      setError("Failed to update vote");
+      setVoteError(true);
     });
   }
 
   function handleVoteDecrement() {
     setArticle((article) => ({ ...article, votes: article.votes - 1 }));
-    patchVotes(article_id, -2).catch(() => {
+    setVoteError(false);
+    patchVotes(article_id, -1).catch(() => {
       setArticle((article) => ({ ...article, votes: article.votes + 1 }));
-      setError("Failed to update vote");
+      setVoteError(true);
     });
   }
+  function handleInputChange(e) {
+    setInput(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const commentData = {
+      username: "grumpy19",
+      body: input,
+    };
+
+    postComment(article_id, commentData)
+      .then((newComment) => {
+        setComments((currentComments) => [newComment, ...currentComments]);
+        setInput("");
+        setNewCommentError(false);
+      })
+      .catch(() => {
+        setNewCommentError(true);
+      });
+  }
+
   if (isLoading) {
     return <p>Loading ◌</p>;
   }
@@ -73,8 +102,25 @@ function ArticleInfo() {
           ⬇️
         </button>
         <span>{article.votes}</span>
+        <p>{voteError ? "Voting failed" : ""}</p>
       </div>
       <p>💬{article.comment_count} Comments</p>
+      <section className="adding-comment">
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="add-comment"></label>
+          <input
+            id="add-comment"
+            required
+            type="text"
+            onChange={handleInputChange}
+            value={input}
+          />
+          <button id="comment-submit" type="submit">
+            Comment
+          </button>
+          <p>{newCommentError ? "Failed to post" : ""}</p>
+        </form>
+      </section>
       <section id="comments">
         <ul>
           {comments.map((comment) => {
