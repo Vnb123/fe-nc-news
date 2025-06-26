@@ -46,7 +46,7 @@ function HomePage() {
             <img src={article.article_img_url} alt="Article Image" />
             <div className="vote-comment">
               <p>{article.votes} Votes</p>
-              <p>{article.comment_count} Comments</p>
+              <p>💬{article.comment_count} Comments</p>
             </div>
           </article>
         );
