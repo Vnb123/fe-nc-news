@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import getArticleById from "./getArticleById";
 import getCommentsByArticleId from "./getCommentsByArticleId";
-
+import patchVotes from "./patchVotes";
 function ArticleInfo() {
   const { article_id } = useParams();
   const [article, setArticle] = useState([]);
@@ -34,6 +34,21 @@ function ArticleInfo() {
       });
   }, [article_id]);
 
+  function handleVoteIncrement() {
+    setArticle((article) => ({ ...article, votes: article.votes + 1 }));
+    patchVotes(article_id, 1).catch(() => {
+      setArticle((article) => ({ ...article, votes: article.votes - 1 }));
+      setError("Failed to update vote");
+    });
+  }
+
+  function handleVoteDecrement() {
+    setArticle((article) => ({ ...article, votes: article.votes - 1 }));
+    patchVotes(article_id, -2).catch(() => {
+      setArticle((article) => ({ ...article, votes: article.votes + 1 }));
+      setError("Failed to update vote");
+    });
+  }
   if (isLoading) {
     return <p>Loading ◌</p>;
   }
@@ -49,7 +64,16 @@ function ArticleInfo() {
       <h3>{new Date(article.created_at).toLocaleString()}</h3>
       <img src={article.article_img_url} alt="Article Image" />
       <p>{article.body}</p>
-      <p>{article.votes} Votes</p>
+      <div id="vote">
+        <span>Vote</span>
+        <button type="submit" onClick={handleVoteIncrement}>
+          ⬆️
+        </button>
+        <button type="submit" onClick={handleVoteDecrement}>
+          ⬇️
+        </button>
+        <span>{article.votes}</span>
+      </div>
       <p>💬{article.comment_count} Comments</p>
       <section id="comments">
         <ul>
@@ -59,7 +83,7 @@ function ArticleInfo() {
                 <p>{comment.author}</p>
                 <h3>Posted {new Date(comment.created_at).toLocaleString()}</h3>
                 <p>{comment.body}</p>
-                <p>Votes {comment.votes}</p>
+                <p>Vote ⬆️⬇️ {comment.votes}</p>
               </li>
             );
           })}
