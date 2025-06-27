@@ -40,8 +40,8 @@ function HomePage() {
             <p>/{article.topic}</p>
             <h2>{article.title}</h2>
             <div className="author-timestamp">
-              <h3>By {article.author}</h3>
-              <h3>{new Date(article.created_at).toLocaleString()}</h3>
+              <p>By {article.author}</p>
+              <p>{new Date(article.created_at).toLocaleString()}</p>
             </div>
             <img src={article.article_img_url} alt="Article Image" />
             <div className="vote-comment">
