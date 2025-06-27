@@ -14,6 +14,7 @@ function ArticleInfo() {
   const [voteError, setVoteError] = useState(false);
   const [input, setInput] = useState("");
   const [newCommentError, setNewCommentError] = useState(false);
+  const [isPosted, setIsPosted] = useState(false);
 
   useEffect(() => {
     getArticleById(article_id)
@@ -72,9 +73,11 @@ function ArticleInfo() {
         setComments((currentComments) => [newComment, ...currentComments]);
         setInput("");
         setNewCommentError(false);
+        setIsPosted(true);
       })
       .catch(() => {
         setNewCommentError(true);
+        setIsPosted(false);
       });
   }
 
@@ -119,6 +122,7 @@ function ArticleInfo() {
             Comment
           </button>
           <p>{newCommentError ? "Failed to post" : ""}</p>
+          <p>{isPosted ? "Comment posted" : ""}</p>
         </form>
       </section>
       <section id="comments">
