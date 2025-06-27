@@ -1,13 +1,26 @@
 html {
   font-family: Arial, Helvetica, sans-serif;
 }
+body {
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 #header {
   text-decoration: none;
+  color: black;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 header {
+  padding: 0 20px;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: solid rgb(226, 226, 226) 2px;
+  border-width: 1px;
 }
 
 .article-list {
@@ -20,8 +33,17 @@ header {
   width: 1400px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 25px;
 }
-
+.article-card {
+  box-sizing: border-box;
+  border: solid rgb(226, 226, 226) 2px;
+  background-color: white;
+  border-width: 1px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  width: 50%;
+}
 .article-card h2 {
   text-align: center;
   width: 80%;
@@ -49,7 +71,9 @@ header {
 
 .article-info {
   display: grid;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 #comments {
@@ -60,7 +84,7 @@ ul {
   list-style: none;
 }
 
-#comment {
+.comment {
   display: block;
   justify-content: space-between;
   background-color: aliceblue;
@@ -98,4 +122,36 @@ button:active {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+}
+
+#article-img-body {
+  display: flex;
+  gap: 20px;
+  padding: 5px;
+}
+
+#article-img-body p {
+  text-align: center;
+  justify-content: center;
+  width: 60%;
+  line-height: 1.5;
+}
+
+#article-author-date {
+  text-align: left;
+  display: flex;
+  gap: 10px;
+  padding: 5px;
+
+  font-size: 85%;
+  width: 50%;
+  height: 40%;
+}
+
+#article-vote-comment {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  text-align: center;
+  width: 50%;
 }
