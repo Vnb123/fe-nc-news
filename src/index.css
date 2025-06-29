@@ -1,8 +1,7 @@
 html {
   font-family: Arial, Helvetica, sans-serif;
 }
-body {
-}
+
 html,
 body {
   margin: 0;
@@ -10,7 +9,7 @@ body {
 }
 #header {
   text-decoration: none;
-  color: black;
+  color: #3e4a61;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 header {
@@ -30,7 +29,7 @@ header {
   list-style-type: none;
   text-align: center;
   gap: 20px;
-  width: 1400px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 25px;
@@ -42,7 +41,8 @@ header {
   border-width: 1px;
   border-radius: 15px;
   margin-bottom: 20px;
-  width: 50%;
+  width: 35%;
+  height: 650px;
 }
 .article-card h2 {
   text-align: center;
@@ -78,6 +78,11 @@ header {
 
 #comments {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  margin: 0 auto;
+  margin-top: 60px;
 }
 
 ul {
@@ -93,8 +98,14 @@ ul {
   text-align: center;
   flex-wrap: wrap;
   list-style-type: none;
-  width: 80%;
+  width: 50%;
+  height: 70%;
   margin-bottom: 1rem;
+}
+
+#comment-box {
+  gap: 20px;
+  justify-content: center;
 }
 
 button {
@@ -119,6 +130,7 @@ button:active {
   color: black;
   border: 2px solid black;
   padding: 0.3%;
+  margin-left: 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -128,12 +140,13 @@ button:active {
   display: flex;
   gap: 20px;
   padding: 5px;
+  justify-content: center;
 }
 
 #article-img-body p {
-  text-align: center;
+  text-align: left;
   justify-content: center;
-  width: 60%;
+  width: 40%;
   line-height: 1.5;
 }
 
@@ -142,16 +155,32 @@ button:active {
   display: flex;
   gap: 10px;
   padding: 5px;
-
+  margin-left: 200px;
   font-size: 85%;
   width: 50%;
   height: 40%;
 }
 
 #article-vote-comment {
-  display: flex;
+  display: grid;
   justify-content: center;
-  align-items: left;
+  align-items: center;
   text-align: center;
-  width: 50%;
+  width: 30%;
+
+  margin-left: 35px;
+}
+
+.article-card img {
+  display: block;
+  width: 90%;
+  height: 60%;
+  object-fit: cover;
+  align-items: center;
+  margin: 0 auto;
+}
+
+#add-comment {
+  height: 90px;
+  width: 600px;
 }
