@@ -133,9 +133,12 @@ function ArticleInfo() {
           </button>
           <span>{article.votes}</span>
           <p>{voteError ? "Voting failed" : ""}</p>
+
+          <p>💬{article.comment_count} Comments</p>
         </div>
-        <p>💬{article.comment_count} Comments</p>
-        <section className="adding-comment">
+      </div>
+      <section id="comments">
+        <div id="comment-box">
           <form onSubmit={handleSubmit}>
             <label htmlFor="add-comment"></label>
             <input
@@ -151,9 +154,7 @@ function ArticleInfo() {
             <p>{newCommentError ? "Failed to post" : ""}</p>
             <p>{isPosted ? "Comment posted" : ""}</p>
           </form>
-        </section>
-      </div>
-      <section id="comments">
+        </div>
         <ul>
           {comments.map((comment) => {
             return (
