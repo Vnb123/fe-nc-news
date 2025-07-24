@@ -5,6 +5,7 @@ import getCommentsByArticleId from "../api/getCommentsByArticleId";
 import patchVotes from "../patchVotes";
 import postComment from "../postComment";
 import deleteComment from "../api/deleteComment";
+import Comment from "./Comments.jsx";
 function ArticleInfo() {
   const { article_id } = useParams();
   const [article, setArticle] = useState([]);
@@ -156,22 +157,14 @@ function ArticleInfo() {
           </form>
         </div>
         <ul>
-          {comments.map((comment) => {
-            return (
-              <li className="comment" key={comment.comment_id}>
-                <p>{comment.author}</p>
-                <h3>Posted {new Date(comment.created_at).toLocaleString()}</h3>
-                <p>{comment.body}</p>
-                <p>Vote ⬆️⬇️ {comment.votes}</p>
-                {comment.author === "grumpy19" && (
-                  <button onClick={() => handleDelete(comment.comment_id)}>
-                    🗑️
-                  </button>
-                )}
-                <p>{deleteError ? "Failed to delete comment" : null}</p>
-              </li>
-            );
-          })}
+          {comments.map((comment) => (
+            <Comment
+              key={comment.comment_id}
+              comment={comment}
+              handleDelete={handleDelete}
+              deleteError={deleteError}
+            />
+          ))}
         </ul>
       </section>
     </main>
