@@ -1,4 +1,4 @@
-import getArticles from "./getArticles";
+import getArticles from "../api/getArticles";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

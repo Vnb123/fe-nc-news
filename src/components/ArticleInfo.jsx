@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import getArticleById from "./getArticleById";
-import getCommentsByArticleId from "./getCommentsByArticleId";
-import patchVotes from "./patchVotes";
-import postComment from "./postComment";
-import deleteComment from "./deleteComment";
+import getArticleById from "../api/getArticleById";
+import getCommentsByArticleId from "../api/getCommentsByArticleId";
+import patchVotes from "../patchVotes";
+import postComment from "../postComment";
+import deleteComment from "../api/deleteComment";
 function ArticleInfo() {
   const { article_id } = useParams();
   const [article, setArticle] = useState([]);
