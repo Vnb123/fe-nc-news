@@ -17,7 +17,7 @@ function ArticleInfo() {
   const [newCommentError, setNewCommentError] = useState(false);
   const [isPosted, setIsPosted] = useState(false);
   const [deleteError, setDeleteError] = useState(false);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   useEffect(() => {
     getArticleById(article_id)
       .then((articleObj) => {
@@ -65,7 +65,8 @@ function ArticleInfo() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     const commentData = {
       username: "grumpy19",
       body: input,
@@ -80,9 +81,11 @@ function ArticleInfo() {
           newComment.author = commentData.username;
         }
         setComments((currentComments) => [newComment, ...currentComments]);
-        setInput("");
         setNewCommentError(false);
         setIsPosted(true);
+        setIsLoading(false);
+        setInput("");
+        setIsSubmitting(false);
       })
       .catch((err) => {
         setNewCommentError(true);
@@ -110,7 +113,7 @@ function ArticleInfo() {
   if (error) {
     return <p>Error: {error.msg}</p>;
   }
-
+  console.log("comments", comments);
   return (
     <main className="article-info">
       <h1>{article.title}</h1>
@@ -149,22 +152,26 @@ function ArticleInfo() {
               onChange={handleInputChange}
               value={input}
             />
-            <button id="comment-submit" type="submit">
-              Comment
+            <button id="comment-submit" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Posting" : "Comment"}
+              {/* Comment */}
             </button>
             <p>{newCommentError ? "Failed to post" : ""}</p>
             <p>{isPosted ? "Comment posted" : ""}</p>
           </form>
         </div>
+
         <ul>
-          {comments.map((comment) => (
-            <Comment
-              key={comment.comment_id}
-              comment={comment}
-              handleDelete={handleDelete}
-              deleteError={deleteError}
-            />
-          ))}
+          {comments.map((comment) => {
+            return (
+              <Comment
+                key={comment.comment_id}
+                comment={comment}
+                handleDelete={handleDelete}
+                deleteError={deleteError}
+              />
+            );
+          })}
         </ul>
       </section>
     </main>
