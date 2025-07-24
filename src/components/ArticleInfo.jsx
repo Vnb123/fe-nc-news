@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import getArticleById from "../api/getArticleById";
 import getCommentsByArticleId from "../api/getCommentsByArticleId";
-import patchVotes from "../patchVotes";
-import postComment from "../postComment";
+import patchVotes from "../api/patchVotes.js";
+import postComment from "../api/postComment.js";
 import deleteComment from "../api/deleteComment";
 import Comment from "./Comments.jsx";
 function ArticleInfo() {
@@ -67,13 +67,15 @@ function ArticleInfo() {
     e.preventDefault();
     if (isSubmitting) return;
     setIsSubmitting(true);
+    setIsLoading(true);
     const commentData = {
       username: "grumpy19",
       body: input,
     };
 
     postComment(article_id, commentData)
-      .then((newComment) => {
+      .then((data) => {
+        const newComment = data.comments[0];
         if (!newComment.created_at) {
           newComment.created_at = new Date().toISOString();
         }
@@ -113,7 +115,7 @@ function ArticleInfo() {
   if (error) {
     return <p>Error: {error.msg}</p>;
   }
-  console.log("comments", comments);
+
   return (
     <main className="article-info">
       <h1>{article.title}</h1>
