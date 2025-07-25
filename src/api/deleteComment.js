@@ -9,6 +9,6 @@ export default function deleteComment(comment_id) {
         msg: "Failed to delete comment",
       });
     }
-    return res.json();
+    return res;
   });
 }
