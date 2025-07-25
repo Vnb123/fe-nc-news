@@ -18,6 +18,7 @@ function ArticleInfo() {
   const [isPosted, setIsPosted] = useState(false);
   const [deleteError, setDeleteError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   useEffect(() => {
     getArticleById(article_id)
       .then((articleObj) => {
@@ -88,6 +89,10 @@ function ArticleInfo() {
         setIsLoading(false);
         setInput("");
         setIsSubmitting(false);
+
+        setTimeout(() => {
+          setIsPosted(false);
+        }, 3000);
       })
       .catch((err) => {
         setNewCommentError(true);
@@ -95,6 +100,9 @@ function ArticleInfo() {
       });
   }
   function handleDelete(comment_id) {
+    if (isDeleting) return;
+    setIsDeleting(true);
+    setIsLoading(true);
     deleteComment(comment_id)
       .then(() => {
         setDeleteError(false);
@@ -103,6 +111,8 @@ function ArticleInfo() {
             (comment) => comment.comment_id !== comment_id
           );
         });
+        setIsDeleting(false);
+        setIsLoading(false);
       })
       .catch(() => {
         setDeleteError(true);
@@ -156,7 +166,6 @@ function ArticleInfo() {
             />
             <button id="comment-submit" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Posting" : "Comment"}
-              {/* Comment */}
             </button>
             <p>{newCommentError ? "Failed to post" : ""}</p>
             <p>{isPosted ? "Comment posted" : ""}</p>
