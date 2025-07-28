@@ -6,6 +6,8 @@ import patchVotes from "../api/patchVotes.js";
 import postComment from "../api/postComment.js";
 import deleteComment from "../api/deleteComment";
 import Comment from "./Comments.jsx";
+import { Link } from "react-router-dom";
+
 function ArticleInfo() {
   const { article_id } = useParams();
   const [article, setArticle] = useState([]);
@@ -123,6 +125,15 @@ function ArticleInfo() {
     return <p>Loading ◌</p>;
   }
   if (error) {
+    if (error.status === 404) {
+      return (
+        <div>
+          <h2> Article not found </h2>
+          <p>The article you are looking for doesn't exist</p>
+          <Link to="/">Go back home</Link>
+        </div>
+      );
+    }
     return <p>Error: {error.msg}</p>;
   }
 
