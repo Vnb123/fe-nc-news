@@ -21,6 +21,7 @@ function ArticleInfo() {
   const [deleteError, setDeleteError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+
   useEffect(() => {
     getArticleById(article_id)
       .then((articleObj) => {
@@ -161,14 +162,14 @@ function ArticleInfo() {
           <span>{article.votes}</span>
           <p>{voteError ? "Voting failed" : ""}</p>
 
-          <p>💬{article.comment_count} Comments</p>
+          <p>💬{comments.length} Comments</p>
         </div>
       </div>
       <section id="comments">
         <div id="comment-box">
           <form onSubmit={handleSubmit}>
             <label htmlFor="add-comment"></label>
-            <input
+            <textarea
               id="add-comment"
               required
               type="text"
