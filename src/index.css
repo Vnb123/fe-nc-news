@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 html {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -183,13 +185,4 @@ button:active {
 #add-comment {
   height: 90px;
   width: 600px;
-}
-
-.not-found {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5;
-
-  width: 50%;
 }
