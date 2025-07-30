@@ -6,7 +6,7 @@ import patchVotes from "../api/patchVotes.js";
 import postComment from "../api/postComment.js";
 import deleteComment from "../api/deleteComment";
 import Comment from "./Comments.jsx";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import patchCommentVotes from "../api/patchCommentVotes.js";
 
 function ArticleInfo() {
@@ -184,7 +184,12 @@ function ArticleInfo() {
           <span>{article.votes}</span>
           <p>{voteError ? "Voting failed" : ""}</p>
 
-          <p>💬{comments.length} Comments</p>
+          <a
+            href="#comments"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            💬{comments.length} Comments
+          </a>
         </div>
       </div>
       <section id="comments">
