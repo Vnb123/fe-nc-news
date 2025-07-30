@@ -1,6 +1,6 @@
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-function Comment({ comment, handleDelete, deleteError }) {
+function Comment({ comment, handleDelete, deleteError, handleCommentVote }) {
   return (
     <li className="comment">
       <div className="comment-header">
@@ -8,7 +8,22 @@ function Comment({ comment, handleDelete, deleteError }) {
         <span>posted {new Date(comment.created_at).toLocaleString()}</span>
       </div>
       <p>{comment.body}</p>
-      <p>Vote ⬆️⬇️ {comment.votes}</p>
+      <div>
+        <span>Vote</span>
+        <button
+          type="submit"
+          onClick={() => handleCommentVote(comment.comment_id, 1)}
+        >
+          ⬆️
+        </button>
+        <button
+          type="submit"
+          onClick={() => handleCommentVote(comment.comment_id, -1)}
+        >
+          ⬇️
+        </button>
+        <span>{comment.votes}</span>
+      </div>
       {comment.author === "grumpy19" && (
         <button
           className="delete-icon"

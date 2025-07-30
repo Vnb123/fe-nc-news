@@ -7,6 +7,7 @@ import postComment from "../api/postComment.js";
 import deleteComment from "../api/deleteComment";
 import Comment from "./Comments.jsx";
 import { Link } from "react-router-dom";
+import patchCommentVotes from "../api/patchCommentVotes.js";
 
 function ArticleInfo() {
   const { article_id } = useParams();
@@ -122,6 +123,27 @@ function ArticleInfo() {
       });
   }
 
+  function handleCommentVote(comment_id, incVotes) {
+    setComments((comments) =>
+      comments.map((comment) =>
+        comment.comment_id === comment_id
+          ? { ...comment, votes: comment.votes + incVotes }
+          : comment
+      )
+    );
+    setVoteError(false);
+    patchCommentVotes(comment_id, incVotes).catch(() => {
+      setComments((comments) =>
+        comments.map((comment) =>
+          comment.comment_id === comment_id
+            ? { ...comment, votes: comment.votes - incVotes }
+            : comment
+        )
+      );
+      setVoteError(true);
+    });
+  }
+
   if (isLoading) {
     return <p>Loading ◌</p>;
   }
@@ -188,10 +210,12 @@ function ArticleInfo() {
           {comments.map((comment) => {
             return (
               <Comment
+                id="comments"
                 key={comment.comment_id}
                 comment={comment}
                 handleDelete={handleDelete}
                 deleteError={deleteError}
+                handleCommentVote={handleCommentVote}
               />
             );
           })}
