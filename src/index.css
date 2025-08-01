@@ -231,3 +231,80 @@ button:active {
   font-weight: bold;
   margin-bottom: 10px;
 }
+
+@media (max-width: 600px) {
+  .article-card {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+  }
+
+  .article-info {
+    max-width: 100%;
+    margin: 20px 10px;
+    padding: 0 10px;
+  }
+
+  #article-author-date {
+    flex-direction: column;
+    text-align: left;
+    margin-left: 0;
+    gap: 5px;
+  }
+  #article-img-body {
+    gap: 10px;
+  }
+  #article-img-body img {
+    width: 100%;
+    height: auto;
+  }
+
+  #comment-box {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  #comments {
+    margin: 0 auto;
+    max-width: 90%;
+
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  #comments ul {
+    max-width: 700px;
+    margin: 0 auto;
+    padding-left: 0;
+    text-align: center;
+  }
+  .comment {
+    display: inline-block;
+    max-width: 600px;
+    font-size: 0.9rem;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .article-list {
+    flex-direction: column;
+    gap: 15px;
+  }
+  #article-vote-comment {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  .article-card {
+    width: 70%;
+    height: auto;
+  }
+  #article-author-date {
+    margin-left: 0;
+    gap: 8px;
+  }
+  #article-vote-comment {
+    gap: 15px;
+  }
+}
