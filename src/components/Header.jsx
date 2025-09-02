@@ -5,7 +5,7 @@ function Header() {
   return (
     <header>
       <Link id="header" to="/">
-        <h1>NC NEWS</h1>
+        <h1 id="nc-header">NC NEWS</h1>
       </Link>
       <SearchBar />
     </header>

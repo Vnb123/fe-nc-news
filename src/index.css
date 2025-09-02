@@ -10,7 +10,7 @@ body {
   padding: 0;
 }
 #header {
-  font-size: 1.3rem;
+  font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
   color: #3e4a61;
@@ -20,7 +20,8 @@ header {
   padding: 0 20px;
   background-color: white;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   border-bottom: solid rgb(226, 226, 226) 2px;
   border-width: 1px;
@@ -234,14 +235,21 @@ button:active {
 .search {
   display: flex;
   gap: 8px;
-  border: 2px solid rgb(27, 27, 27);
+  align-items: center;
+  border: 2px solid rgb(102, 102, 102);
   border-radius: 25px;
   padding: 4px 8px;
+  margin-bottom: 20px;
+  width: 30%;
 }
 #search-bar {
+  flex: 1;
+  padding: 0 8px;
+  font-size: 1rem;
   background-color: transparent;
   border: none;
-  height: 100%;
+  height: auto;
+  line-height: normal;
 }
 #search-bar:focus {
   outline: none;
