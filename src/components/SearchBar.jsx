@@ -7,10 +7,10 @@ function SearchBar() {
   }
   return (
     <div className="search">
-      <button id="search-button" type="submit">
-        <IoIosSearch size={20} />
-      </button>
       <form id="search" onSubmit={handleSubmit}>
+        <button id="search-button" type="submit">
+          <IoIosSearch size={20} />
+        </button>
         <input id="search-bar" type="text" required></input>
       </form>
     </div>
