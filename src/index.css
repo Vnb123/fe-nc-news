@@ -26,7 +26,12 @@ header {
   border-bottom: solid rgb(226, 226, 226) 2px;
   border-width: 1px;
 }
-
+a#header {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
 .article-list {
   display: flex;
   justify-content: center;
@@ -316,6 +321,14 @@ button:active {
   #article-vote-comment {
     flex-direction: column;
     gap: 10px;
+  }
+  .search {
+    width: 85%;
+    padding: 4px 12px;
+    margin-bottom: 20px;
+  }
+  #search-bar {
+    font-size: 0.9rem;
   }
 }
 @media (min-width: 601px) and (max-width: 900px) {
