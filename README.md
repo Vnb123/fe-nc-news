@@ -1,15 +1,71 @@
-The link to the deployed app on Netlify is https://ncnewsvb.netlify.app/
+# 📰 NC News Frontend
 
-This is a React app where users can browse articles, vote on them and post/delete articles under their username.
+A responsive frontend for the [NC News API](https://github.com/Vnb123/be-nc-news), built with **React** and **Vite**.  
+Users can browse articles, view details, vote, and add/delete comments.  
+Originally developed as part of a Northcoders bootcamp project.
 
-The HomePage has a list of current articles by date of latest released, and upon clicking on chosen article it takes the user to single article page where they can vote on that article and post/delete a comment.
+---
 
-The hardcoded username for the project was 'grumpy19' to check the post and delete functionality.
+## 🌐 Live Demo
 
-Node version v23.11.0 was used to run locally
+Check out the live app: [https://ncnewsvb.netlify.app](https://ncnewsvb.netlify.app/)
 
-To run the project locally git clone https://github.com/Vnb123/fe-nc-news, cd into it and use npm install in the terminal.
+---
 
-The backend repo for the project: https://github.com/Vnb123/nc-news
+## ✨ Features
 
-This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/)
+- Browse all articles (sorted by date)
+- View individual article pages with full content
+- Vote on articles and comments
+- Add comments (logged-in demo user: `grumpy19`)
+- Delete comments (only your own)
+- Responsive design for desktop and mobile
+
+---
+
+## 📦 Installation & Setup
+
+1. Clone the repo:
+
+   git clone https://github.com/Vnb123/fe-nc-news.git
+   cd fe-nc-news
+
+2. Install dependencies:
+
+   npm install
+
+3. Run the development server:
+
+   npm run dev
+
+The app will be available at: http://localhost:5173
+
+---
+
+## 🔗 Backend API
+
+This frontend consumes the [NC News backend API](https://github.com/Vnb123/be-nc-news).
+
+- Hosted Render URL: https://be-nc-news.onrender.com/api
+- Local URL (if running backend locally): http://localhost:9090/api
+- **Note:** The Render service must be deployed and running to access the hosted API.
+
+---
+
+## ⚙️ Project Structure
+
+- `src/components/` → reusable React components
+- `src/pages/` → page-level components
+- `src/utils/` → helper functions and API calls
+- `src/App.jsx` → main app router
+- `src/main.jsx` → app entry point
+
+---
+
+## 🛠 Tech Stack
+
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [React Router](https://reactrouter.com/)
+- [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
